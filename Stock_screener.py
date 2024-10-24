@@ -114,14 +114,14 @@ def update_stock_data(n_clicks, tickers):
             last_2_days_avg = last_7_days['Close'][-2:].mean()
 
             # Identify underpriced or overpriced stocks
-            if last_2_days_avg < avg_prediction * 0.75:
+            if last_2_days_avg < avg_prediction * 0.85:
                 underpriced_data.append({
                     'ticker': ticker,
                     'latest_price': latest_price,
                     'prediction_avg': avg_prediction,
                     'percent_below': f'{(avg_prediction - last_2_days_avg) / avg_prediction * 100:.2f}%'
                 })
-            elif last_2_days_avg > avg_prediction * 1.25:
+            elif last_2_days_avg > avg_prediction * 1.15:
                 overpriced_data.append({
                     'ticker': ticker,
                     'latest_price': latest_price,

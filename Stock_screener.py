@@ -24,7 +24,7 @@ app.layout = dbc.Container([
                 id='stock-input', 
                 type='text', 
                 placeholder='Enter stock tickers separated by comma', 
-                value='AAPL, MSFT'
+                value='SPY,VOO,VTI,VWO,QQQ,AAPL,MSFT,TSLA,AMZN,META,GOOGL,NVDA,AMD,QS,TSLA,PLUG,COST,TGT,CMG,DG,DLTR,NKE,EXPE,PYPL,IONQ,RGTI'
             ),
             dbc.Button('Update Stocks', id='update-button', n_clicks=0, color='primary', className='ml-2'),
             html.Br(),
@@ -114,14 +114,14 @@ def update_stock_data(n_clicks, tickers):
             last_2_days_avg = last_7_days['Close'][-2:].mean()
 
             # Identify underpriced or overpriced stocks
-            if last_2_days_avg < avg_prediction * 0.85:
+            if last_2_days_avg < avg_prediction * 0.95:
                 underpriced_data.append({
                     'ticker': ticker,
                     'latest_price': latest_price,
                     'prediction_avg': avg_prediction,
                     'percent_below': f'{(avg_prediction - last_2_days_avg) / avg_prediction * 100:.2f}%'
                 })
-            elif last_2_days_avg > avg_prediction * 1.15:
+            elif last_2_days_avg > avg_prediction * 1.05:
                 overpriced_data.append({
                     'ticker': ticker,
                     'latest_price': latest_price,

@@ -12,7 +12,10 @@ from datetime import datetime
 # Initialize the Dash app
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 
+# Read in list of Stock Tickers
 
+tckrs = pd.read_csv('watch_list_tickers.csv',header=None,names = ['Tickers','NA'])
+tckrs = ','.join(tckrs['Tickers'].unique().astype(str).flatten())
 
 # Layout of the app
 app.layout = dbc.Container([
@@ -24,7 +27,7 @@ app.layout = dbc.Container([
                 id='stock-input', 
                 type='text', 
                 placeholder='Enter stock tickers separated by comma', 
-                value='SPY,VOO,VTI,VWO,QQQ,AAPL,MSFT,TSLA,AMZN,META,GOOGL,NVDA,AMD,QS,TSLA,PLUG,COST,TGT,CMG,DG,DLTR,NKE,EXPE,PYPL,IONQ,RGTI'
+                value=tckrs
             ),
             dbc.Button('Update Stocks', id='update-button', n_clicks=0, color='primary', className='ml-2'),
             html.Br(),
